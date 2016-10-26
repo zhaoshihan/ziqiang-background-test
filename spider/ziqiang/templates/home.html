@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <script>
+	$(function () { $("[data-toggle='popover']").popover(); });
+    $(function(){
+        //$('table tr:not(:first)').remove();
+        var len = $('table tr').length;
+        for(var i = 1;i<len;i++){
+            $('table tr:eq('+i+') td:first').text(i);
+        }
+
+});
+    </script>
+    <title>武大新闻网-要闻</title>
+</head>
+<body>
+<table class="table table-hover table-bordered" style="width: 600px; margin: auto; margin-top: 30px; margin-bottom: 50px">
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>标题</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in articles %}
+    <tr>
+
+        <td style="width: 50px"></td>
+        <td><a href='#' data-toggle="modal" data-target="#{{ i.id }}">{{ i }}</a></td>
+    </tr>
+        <div class="modal fade" id="{{ i.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">{{ i }}</h4>
+            </div>
+            <div class="modal-body">{{ i.content }}</div>
+            <div class="modal-footer">
+                <h5>参考链接：{{ i.url }}</h5>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
